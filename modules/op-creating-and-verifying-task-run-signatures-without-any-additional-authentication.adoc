@@ -4,7 +4,7 @@
 
 :_content-type: PROCEDURE
 [id="creating-and-verifying-task-run-signatures-without-any-additional-authentication_{context}"]
-== Creating and verifying task run signatures without any additional authentication
+= Creating and verifying task run signatures without any additional authentication
 
 [role="_abstract"]
 To verify signatures of task runs using {tekton-chains} with any additional authentication, perform the following tasks:
@@ -16,7 +16,7 @@ To verify signatures of task runs using {tekton-chains} with any additional auth
 * Verify the signature of the task run.
 
 .Prerequisites
-Ensure that the following are installed on the cluster:
+Ensure that the following components are installed on the cluster:
 
 * {pipelines-title} Operator
 * {tekton-chains}
@@ -24,22 +24,25 @@ Ensure that the following are installed on the cluster:
 
 .Procedure
 
-. Create an encrypted x509 key pair and save it as a Kubernetes secret:
+. Create an encrypted x509 key pair and save it as a Kubernetes secret. For more information about creating a key pair and saving it as a secret, see "Signing secrets in {tekton-chains}".
+. In the {tekton-chains} configuration, disable the OCI storage, and set the task run storage and format to `tekton`. In the `TektonConfig` custom resource set the following values:
 +
-[source,terminal]
+[source,yaml]
 ----
-$ cosign generate-key-pair k8s://openshift-pipelines/signing-secrets
+apiVersion: operator.tekton.dev/v1alpha1
+kind: TektonConfig
+metadata:
+  name: config
+spec:
+# ...
+    chain:
+      artifacts.oci.storage: ""
+      artifacts.taskrun.format: tekton
+      artifacts.taskrun.storage: tekton
+# ...
 ----
 +
-Provide a password when prompted. Cosign stores the resulting private key as part of the `signing-secrets` Kubernetes secret in the `openshift-pipelines` namespace.
-
-. In the {tekton-chains} configuration, disable the OCI storage, and set the task run storage and format to `tekton`. 
-+
-[source,terminal]
-----
-$ oc patch configmap chains-config -n openshift-pipelines -p='{"data":{"artifacts.oci.storage": "", "artifacts.taskrun.format":"tekton", "artifacts.taskrun.storage": "tekton"}}'
-----
-
+For more information about configuring {tekton-chains} using the `TektonConfig` custom resource, see "Configuring {tekton-chains}".
 . Restart the {tekton-chains} controller to ensure that the modified configuration is applied.
 +
 [source.terminal]
@@ -47,7 +50,7 @@ $ oc patch configmap chains-config -n openshift-pipelines -p='{"data":{"artifact
 $ oc delete po -n openshift-pipelines -l app=tekton-chains-controller
 ----
 
-. Create a task run. 
+. Create a task run.
 +
 [source,terminal]
 ----
@@ -70,21 +73,18 @@ NAME                            STATUS
 ∙ image-digest-exporter-xlkn7   Completed
 ----
 
-. Retrieve the signature and payload from the object stored as `base64` encoded annotations:
+. Retrieve the signature from the object stored as `base64` encoded annotations:
 +
 [source,terminal]
 ----
 $ export TASKRUN_UID=$(tkn tr describe --last -o  jsonpath='{.metadata.uid}')
-$ tkn tr describe --last -o jsonpath="{.metadata.annotations.chains\.tekton\.dev/signature-taskrun-$TASKRUN_UID}" > signature
-$ tkn tr describe --last -o jsonpath="{.metadata.annotations.chains\.tekton\.dev/payload-taskrun-$TASKRUN_UID}" | base64 -d > payload
+$ tkn tr describe --last -o jsonpath="{.metadata.annotations.chains\.tekton\.dev/signature-taskrun-$TASKRUN_UID}" | base64 -d > sig
 ----
 
-. Verify the signature.
+. Verify the signature using the public key that you created. Replace `path/to/cosign.pub` with the path name of the public key file.
 +
 [source,terminal]
 ----
-$ cosign verify-blob --key k8s://openshift-pipelines/signing-secrets --signature ./signature ./payload
+$ cosign verify-blob-attestation --insecure-ignore-tlog --key path/to/cosign.pub --signature sig --type slsaprovenance --check-claims=false /dev/null
 Verified OK
 ----
-
-
