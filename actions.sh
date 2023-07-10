@@ -1,0 +1,14 @@
+cp /home/mramendi/repos/openshift-docs/images/Github-app-details.png images
+cp /home/mramendi/repos/openshift-docs/images/op-pipeline-yaml.png images
+cp /home/mramendi/repos/openshift-docs/images/op-pipeline-builder.png images
+cp /home/mramendi/repos/openshift-docs/images/Git-access-token.png images
+cp /home/mramendi/repos/openshift-docs/images/Git-access-token-secret.png images
+cp /home/mramendi/repos/openshift-docs/images/op-pipeline-details1.png images
+cp /home/mramendi/repos/openshift-docs/images/kebab.png images
+cp /home/mramendi/repos/openshift-docs/images/kebab.png images
+cp /home/mramendi/repos/openshift-docs/images/kebab.png images
+cp /home/mramendi/repos/openshift-docs/images/op_pipeline_run2.png images
+cp /home/mramendi/repos/openshift-docs/images/op_pipeline_topology1.png images
+cp /home/mramendi/repos/openshift-docs/images/kebab.png images
+cp /home/mramendi/repos/openshift-docs/images/not-placetools.png images
+cp /home/mramendi/repos/openshift-docs/images/filtered-messages.png images

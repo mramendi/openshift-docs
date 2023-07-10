@@ -1,0 +1,61 @@
+asciidoctor: WARNING: image to embed not found or not readable: /home/mramendi/repos/pipelines-doc-temp/pipelines/images/Github-app-details.png
+asciidoctor: WARNING: image to embed not found or not readable: /home/mramendi/repos/pipelines-doc-temp/pipelines/images/op-pipeline-yaml.png
+asciidoctor: WARNING: image to embed not found or not readable: /home/mramendi/repos/pipelines-doc-temp/pipelines/images/op-pipeline-builder.png
+asciidoctor: WARNING: image to embed not found or not readable: /home/mramendi/repos/pipelines-doc-temp/pipelines/images/Git-access-token.png
+asciidoctor: WARNING: image to embed not found or not readable: /home/mramendi/repos/pipelines-doc-temp/pipelines/images/Git-access-token-secret.png
+asciidoctor: WARNING: image to embed not found or not readable: /home/mramendi/repos/pipelines-doc-temp/pipelines/images/op-pipeline-details1.png
+asciidoctor: WARNING: image to embed not found or not readable: /home/mramendi/repos/pipelines-doc-temp/pipelines/images/kebab.png
+asciidoctor: WARNING: image to embed not found or not readable: /home/mramendi/repos/pipelines-doc-temp/pipelines/images/kebab.png
+asciidoctor: WARNING: image to embed not found or not readable: /home/mramendi/repos/pipelines-doc-temp/pipelines/images/kebab.png
+asciidoctor: WARNING: image to embed not found or not readable: /home/mramendi/repos/pipelines-doc-temp/pipelines/images/op_pipeline_run2.png
+asciidoctor: WARNING: image to embed not found or not readable: /home/mramendi/repos/pipelines-doc-temp/pipelines/images/op_pipeline_topology1.png
+asciidoctor: WARNING: image to embed not found or not readable: /home/mramendi/repos/pipelines-doc-temp/pipelines/images/kebab.png
+asciidoctor: WARNING: image to embed not found or not readable: /home/mramendi/repos/pipelines-doc-temp/pipelines/images/not-placetools.png
+asciidoctor: WARNING: image to embed not found or not readable: /home/mramendi/repos/pipelines-doc-temp/pipelines/images/filtered-messages.png
+Building all distributions.
+WARN: The following branches do not exist in your local git repo:
+- enterprise-3.0
+- enterprise-3.1
+- enterprise-3.10
+- enterprise-3.11
+- enterprise-3.2
+- enterprise-3.3
+- enterprise-3.4
+- enterprise-3.5
+- enterprise-3.6
+- enterprise-3.7
+- enterprise-3.9
+- enterprise-4.1
+- enterprise-4.10
+- enterprise-4.11
+- enterprise-4.12
+- enterprise-4.13
+- enterprise-4.14
+- enterprise-4.2
+- enterprise-4.3
+- enterprise-4.4
+- enterprise-4.5
+- enterprise-4.6
+- enterprise-4.7
+- enterprise-4.8
+- enterprise-4.9
+- main
+- rhacs-docs-3.65
+- rhacs-docs-3.66
+- rhacs-docs-3.67
+- rhacs-docs-3.68
+- rhacs-docs-3.69
+- rhacs-docs-3.70
+- rhacs-docs-3.71
+- rhacs-docs-3.72
+- rhacs-docs-3.73
+- rhacs-docs-3.74
+- rhacs-docs-4.0
+- rhacs-docs-4.1
+- rosa-preview
+- serverless-docs-1.28
+- serverless-docs-1.29
+The build will proceed but these branches will not be generated.
+WARN: Branch pipelines-docs includes 140 files that are not referenced in the /tmp/_topic_map.yml20230705-650930-pjsqvr file. Set logging to 'debug' for details.
+Building OKD for branch 'pipelines-docs'
+Stashing uncommited changes and files in working branch.
