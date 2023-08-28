@@ -23,19 +23,12 @@ endif::[]
 
 ifndef::openshift-rosa[]
 
-ifndef::openshift-rosa,openshift-dedicated,openshift-dpu,microshift[]
+ifndef::openshift-rosa,openshift-dedicated,openshift-dpu[]
 To navigate the {product-title} {product-version} documentation, you can use one of the following methods:
 
 * Use the left navigation bar to browse the documentation.
 * Select the task that interests you from the contents of this Welcome page.
-endif::openshift-rosa,openshift-dedicated,openshift-dpu,microshift[]
-
-ifdef::microshift[]
-To navigate the {product-title} {product-version} documentation, you can use one of the following methods:
-
-* Use the navigation bars and links to browse.
-* Select the task that interests you from the contents of this Welcome page.
-endif::microshift[]
+endif::openshift-rosa,openshift-dedicated,openshift-dpu[]
 
 ifdef::openshift-dpu[]
 To navigate the {product-title} data processing unit (DPU) documentation, use the left navigation bar.
@@ -49,22 +42,12 @@ To navigate the {product-title} documentation, use the left navigation bar.
 For documentation that is not specific to {product-title}, see the link:https://docs.openshift.com/container-platform/latest/welcome/index.html[OpenShift Container Platform documentation].
 endif::[]
 
-ifdef::microshift[]
-Start with xref:../microshift_getting_started/microshift-understanding.adoc#microshift-understanding[Understanding {product-title}] and xref:../microshift_install/microshift-install-rpm.adoc#microshift-install-rpm[Installing].
-Next, view the xref:../microshift_release_notes/microshift-4-14-release-notes.adoc#microshift-4-14-release-notes[release notes].
-
-* For information about Red Hat Device Edge, read the link:https://access.redhat.com/documentation/en-us/red_hat_device_edge/4/html/overview/device-edge-overview[Red Hat Device Edge overview].
-* For information about Red Hat Enterprise Linux for Edge, read the link:https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/9/html/composing_installing_and_managing_rhel_for_edge_images/index[RHEL for Edge documentation].
-* For container platform documentation that is not specific to {product-title}, read the link:https://docs.openshift.com/container-platform/latest/welcome/index.html[OpenShift Container Platform documentation].
-endif::[]
-
 ifdef::openshift-enterprise,openshift-webscale,openshift-origin[]
 Start with xref:../architecture/architecture.adoc#architecture-overview-architecture[Architecture] and
 xref:../security/container_security/security-understanding.adoc#understanding-security[Security and compliance].
 ifdef::openshift-enterprise,openshift-webscale[]
 Next, view the
 xref:../release_notes/ocp-4-14-release-notes.adoc#ocp-4-14-release-notes[release notes].
-endif::[]
 endif::[]
 
 ifdef::openshift-online,openshift-aro[]
@@ -119,10 +102,6 @@ xref:../installing/installing_openstack/installing-openstack-load-balancing.adoc
 To troubleshoot OpenStack installation issues, you can
 xref:../installing/installing_openstack/installing-openstack-troubleshooting.adoc#installing-openstack-troubleshooting[view instance logs and ssh to an instance].
 ////
-
-- **Install a cluster on {rh-virtualization-first}**: You can deploy clusters on {rh-virtualization-first} with a
-xref:../installing/installing_rhv/installing-rhv-default.adoc#installing-rhv-default[quick install] or an
-xref:../installing/installing_rhv/installing-rhv-customizations.adoc#installing-rhv-customizations[install with customizations].
 
 ifndef::openshift-origin[]
 - **Install a cluster in a restricted network**: If your cluster that uses
@@ -286,7 +265,7 @@ You can xref:../storage/expanding-persistent-volumes.adoc#expanding-persistent-v
 
 - **xref:../operators/understanding/olm-understanding-operatorhub.adoc#olm-understanding-operatorhub[Manage Operators]**: Lists of Red Hat, ISV, and community Operators can be reviewed by cluster administrators and xref:../operators/admin/olm-adding-operators-to-cluster.adoc#olm-adding-operators-to-a-cluster[installed on their clusters]. After you install them, you can xref:../operators/user/olm-creating-apps-from-installed-operators.adoc#olm-creating-apps-from-installed-operators[run], xref:../operators/admin/olm-upgrading-operators.adoc#olm-upgrading-operators[upgrade], back up, or otherwise manage the Operator on your cluster.
 
-- **xref:../windows_containers/understanding-windows-container-workloads.html#understanding-windows-container-workloads_understanding-windows-container-workloads[Understanding Windows container workloads]**. You can use the {productwinc} feature to run Windows compute nodes in an {product-title} cluster. This is possible by using the Red Hat Windows Machine Config Operator (WMCO) to install and manage Windows nodes.
+- **xref:../windows_containers/understanding-windows-container-workloads.adoc#understanding-windows-container-workloads_understanding-windows-container-workloads[Understanding Windows container workloads]**. You can use the {productwinc} feature to run Windows compute nodes in an {product-title} cluster. This is possible by using the Red Hat Windows Machine Config Operator (WMCO) to install and manage Windows nodes.
 
 === Change cluster components
 
@@ -328,5 +307,6 @@ While cluster maintenance and host configuration is performed by the Red Hat Sit
 - *Monitor clusters*: Learn to use the Web UI to access monitoring dashboards.
 - *Manage nodes*: Learn to manage nodes, including configuring machine pools and autoscaling.
 endif::[]
+endif::openshift-enterprise,openshift-webscale,openshift-origin[]
 
 endif::openshift-rosa[]

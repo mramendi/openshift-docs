@@ -59,6 +59,7 @@ ifndef::openshift-rosa[]
 - GCP Filestore
 endif::openshift-rosa[]
 ifdef::openshift-enterprise,openshift-webscale,openshift-origin[]
+- {ibmpowerProductName} Virtual Server Block
 - IBM VPC Block
 endif::openshift-enterprise,openshift-webscale,openshift-origin[]
 ifdef::openshift-enterprise,openshift-webscale,openshift-origin,openshift-aro[]
@@ -158,6 +159,7 @@ endif::openshift-rosa[]
 ifdef::openshift-enterprise,openshift-webscale,openshift-origin[]
 //|GlusterFS  | ✅ | ✅ | ✅
 |HostPath  | ✅ | - |  -
+|{ibmpowerProductName} Virtual Server Disk | ✅ | ✅ |  ✅
 |IBM VPC Disk | ✅ | - |  -
 |iSCSI  | ✅ | ✅ |  -
 |Local volume | ✅ | - |  -
@@ -171,7 +173,7 @@ endif::[]
 [.small]
 --
 1. ReadWriteOnce (RWO) volumes cannot be mounted on multiple nodes. If a node fails, the system does not allow the attached RWO volume to be mounted on a new node because it is already assigned to the failed node. If you encounter a multi-attach error message as a result, force delete the pod on a shutdown or crashed node to avoid data loss in critical workloads, such as when dynamic persistent volumes are attached.
-2. Use a recreate deployment strategy for pods that rely on AWS EBS.
+2. Use a recreate deployment strategy for pods that rely on Amazon EBS.
 ifndef::openshift-dedicated,openshift-rosa[]
 3. If the underlying vSphere environment supports the vSAN file service, then the vSphere Container Storage Interface (CSI) Driver Operator installed by
 {product-title} supports provisioning of ReadWriteMany (RWX) volumes. If you do not have vSAN file service configured, and you request RWX, the volume fails to get created and an error is logged. For more information, see "Using Container Storage Interface" -> "VMware vSphere CSI Driver Operator".
@@ -236,7 +238,7 @@ cluster.
 
 |===
 
-You can view the name of the PVC bound to the PV by running:
+You can view the name of the PVC that is bound to the PV by running the following command:
 
 [source,terminal]
 ----
@@ -250,6 +252,7 @@ You can specify mount options while mounting a PV by using the attribute `mountO
 
 For example:
 
+ifndef::microshift[]
 .Mount options example
 [source,yaml]
 ----
@@ -299,3 +302,31 @@ ifndef::openshift-dedicated,openshift-rosa[]
 Fibre Channel and HostPath PVs do not support mount options.
 ====
 endif::openshift-dedicated,openshift-rosa[]
+endif::microshift[]
+
+ifdef::microshift[]
+.Mount options example
+[source,yaml]
+----
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  annotations:
+    storageclass.kubernetes.io/is-default-class: "true"
+  name: topolvm-provisioner
+mountOptions:
+  - uid=1500
+  - gid=1500
+parameters:
+  csi.storage.k8s.io/fstype: xfs
+provisioner: topolvm.io
+reclaimPolicy: Delete
+volumeBindingMode: WaitForFirstConsumer
+allowVolumeExpansion: true
+----
+
+[NOTE]
+====
+`mountOptions` are not validated. Incorrect values will cause the mount to fail and an event to be logged to the PVC.
+====
+endif::microshift[]

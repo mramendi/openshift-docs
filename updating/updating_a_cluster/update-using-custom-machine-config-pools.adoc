@@ -6,7 +6,11 @@ include::_attributes/common-attributes.adoc[]
 
 toc::[]
 
+////
+WARNING: This assembly has been moved into a subdirectory for 4.14+. Changes to this assembly for earlier versions should be done in separate PRs based off of their respective version branches. Otherwise, your cherry picks may fail.
 
+To do: Remove this comment once 4.13 docs are EOL.
+////
 
 There might be some scenarios where you want a more controlled rollout of an update to the worker nodes in order to ensure that mission-critical applications stay available during the whole update, even if the update process causes your applications to fail. Depending on your organizational needs, you might want to update a small subset of worker nodes, evaluate cluster and workload health over a period of time, then update the remaining nodes. This is commonly referred to as a _canary_ update. Or, you might also want to fit worker node updates, which often require a host reboot, into smaller defined maintenance windows when it is not possible to take a large maintenance window to update the entire cluster at one time.
 
@@ -55,8 +59,13 @@ Also, you need to consider how much extra capacity you have available in your cl
 
 You can use this update process with all documented {product-title} update processes. However, the process does not work with {op-system-base-full} machines, which are updated using Ansible playbooks.
 
+// About performing a canary rollout update
 include::modules/update-using-custom-machine-config-pools-about.adoc[leveloffset=+1]
+
+// Creating machine config pools to perform a canary rollout update
 include::modules/update-using-custom-machine-config-pools-mcp.adoc[leveloffset=+1]
+
+// Pausing the machine config pools
 include::modules/update-using-custom-machine-config-pools-pause.adoc[leveloffset=+1]
 
 [id="update-using-custom-machine-config-pools-update_{context}"]
@@ -69,6 +78,8 @@ When the MCPs enter ready state, you can perform the cluster update. See one of 
 
 After the update is complete, you can start to unpause the MCPs one-by-one.
 
+// Unpausing the machine config pools
 include::modules/update-using-custom-machine-config-pools-unpause.adoc[leveloffset=+1]
 
+// Moving a node to the original machine config pool
 include::modules/update-using-custom-machine-config-pools-mcp-remove.adoc[leveloffset=+1]

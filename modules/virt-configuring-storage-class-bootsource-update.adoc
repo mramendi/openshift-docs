@@ -1,6 +1,6 @@
 // Module included in the following assembly:
 //
-// * virt/vm_templates/virt-automatic-bootsource-updates.adoc
+// * virt/virtual_machines/virt-automatic-bootsource-updates.adoc
 //
 
 :_content-type: PROCEDURE
@@ -18,9 +18,9 @@ Boot sources are created from storage using the default storage class. If your c
 
 . Open the `HyperConverged` CR in your default editor by running the following command:
 +
-[source,terminal]
+[source,terminal,subs="attributes+"]
 ----
-$ oc edit hco -n openshift-cnv kubevirt-hyperconverged
+$ oc edit hyperconverged kubevirt-hyperconverged -n {CNVNamespace}
 ----
 
 . Define a new storage class by entering a value in the `storageClassName` field:
@@ -43,12 +43,12 @@ spec:
 ----
 <1> Define the storage class.
 
-. Remove the `storageclass.kubernetes.io/is-default-class` annotation from the current default storage class. 
+. Remove the `storageclass.kubernetes.io/is-default-class` annotation from the current default storage class.
 .. Retrieve the name of the current default storage class by running the following command:
 +
 [source,terminal]
 ----
-$ oc get sc
+$ oc get storageclass
 ----
 +
 .Example output

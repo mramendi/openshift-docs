@@ -1,6 +1,7 @@
 [id="contributing-to-docs-doc-guidelines"]
 = Documentation guidelines
 include::_attributes/common-attributes.adoc
+
 :toc: macro
 
 The documentation guidelines for OpenShift 4 build on top of the
@@ -43,7 +44,6 @@ include::_attributes/common-attributes.adoc[]                   <4>
                                                                 <6>
 toc::[]                                                         <7>
 ----
-
 <1> The content type for the file. For assemblies, always use `:_content-type: ASSEMBLY`. Place this attribute before the anchor ID or, if present, the conditional that contains the anchor ID.
 <2> A unique (within OpenShift docs) anchor ID for this assembly. Use lowercase. Example: cli-developer-commands
 <3> Human readable title (notice the `=` top-level header)
@@ -51,7 +51,8 @@ toc::[]                                                         <7>
 +
 [NOTE]
 ====
-The `{product-title}` and `{product-version}` common attributes are not defined in the `_attributes/common-attributes.adoc` file. Those attributes are pulled by AsciiBinder from the distro mapping definitions in the https://github.com/openshift/openshift-docs/blob/main/_distro_map.yml[_distro_map.yml] file. See xref:product-name-and-version[Product title and version] and xref:attribute-files[attribute files] for more information on this topic.
+* The `{product-title}` and `{product-version}` common attributes are not defined in the `_attributes/common-attributes.adoc` file. Those attributes are pulled by AsciiBinder from the distro mapping definitions in the https://github.com/openshift/openshift-docs/blob/main/_distro_map.yml[_distro_map.yml] file. See xref:product-name-and-version[Product title and version] and xref:attribute-files[attribute files] for more information on this topic.
+* If you use a variable in the title of the first assembly in a section, move the include attributes directive above the title in this assembly. Otherwise, the variable will not render correctly on access.redhat.com.
 ====
 +
 <5> Context used for identifying headers in modules that is the same as the anchor ID. Example: cli-developer-commands.
@@ -191,11 +192,6 @@ Try to shorten the file name as much as possible _without_ abbreviating importan
 == Directory names
 
 If you create a directory with a multiple-word name, separate each word with an underscore, for example `backup_and_restore`.
-
-[NOTE]
-====
-Do not italicize user-replaced values. This guideline is an exception to the link:https://redhat-documentation.github.io/supplementary-style-guide/#user-replaced-values[_Red Hat supplementary style guide for product documentation_].
-====
 
 Do not create or rename a top-level directory in the repository and topic map without checking with the docs program manager first.
 
@@ -863,10 +859,7 @@ Comment out the callout in the YAML file to ensure that file can still be parsed
 Asciidoctor recognises the commented callout and renders it correctly in the output.
 For example:
 
-[source,yaml]
-----
-apiVersion: v1 # <1>
-----
+`apiVersion: v1 # <1>`
 
 [discrete]
 === Version and upgrade implications
@@ -1168,7 +1161,14 @@ Now using project "my-project" on server "https://openshift.example.com:6443".
 ----
 ....
 
-* To mark up command syntax, use the code block and wrap any replaceable values in angle brackets (`<>`) with the required command parameter, using underscores (`_`) between words as necessary for legibility. Do not italicize user-replaced values. For example:
+* To mark up command syntax, use the code block and wrap any replaceable values in angle brackets (`<>`) with the required command parameter, using underscores (`_`) between words as necessary for legibility.
++
+[IMPORTANT]
+====
+Do not italicize user-replaced values. This guideline is an exception to the link:https://redhat-documentation.github.io/supplementary-style-guide/#user-replaced-values[_Red Hat supplementary style guide for product documentation_].
+====
++
+For example:
 +
 ....
 To view a list of objects for the specified object type, enter the following command:
@@ -1676,6 +1676,14 @@ Nest admonitions when using the `collapsible` option.
 |User password
 |password
 |===
+
+[IMPORTANT]
+====
+Do not use a password format that matches the format of a real password. Documenting such a password format can cause the following issues:
+
+* Indicates that Red Hat publicly exposes sensitive data in their documentation.
+* Leads to additional security incidents that the Information Security, InfoSec, team must investigate. Such security incidents, although minor, can impact the InfoSec team's resources and potentially delay them from focusing on actual security incidents.
+====
 
 .Projects and applications
 [option="header"]

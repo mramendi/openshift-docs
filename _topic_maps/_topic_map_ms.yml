@@ -23,13 +23,11 @@
 
 ---
 Name: About
-Dir: welcome
+Dir: microshift_welcome
 Distros: microshift
 Topics:
 - Name: Welcome
   File: index
-- Name: Legal notice
-  File: legal-notice
 ---
 Name: Release notes
 Dir: microshift_release_notes
@@ -144,6 +142,8 @@ Topics:
   File: expanding-persistent-volumes-microshift
 - Name: Dynamic storage using the LVMS plugin
   File: microshift-storage-plugin-overview
+- Name: Working with volume snapshots
+  File: volume-snapshots-microshift
 ---
 Name: Running applications
 Dir: microshift_running_apps
@@ -153,6 +153,8 @@ Topics:
   File: microshift-applications
 - Name: Operators
   File: microshift-operators
+- Name: Greenboot workload health check scripts
+  File: microshift-greenboot-workload-scripts
 ---
 Name: Troubleshooting
 Dir: microshift_troubleshooting

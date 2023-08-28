@@ -232,6 +232,8 @@ Topics:
     File: installing-azure-stack-hub-network-customizations
   - Name: Installing a cluster on Azure Stack Hub using ARM templates
     File: installing-azure-stack-hub-user-infra
+  - Name: Installation configuration parameters for Azure Stack Hub
+    File: installation-config-parameters-ash
   - Name: Uninstalling a cluster on Azure Stack Hub
     File: uninstalling-cluster-azure-stack-hub
 - Name: Installing on GCP
@@ -266,6 +268,8 @@ Topics:
     File: installing-restricted-networks-gcp
   - Name: Installing a three-node cluster on GCP
     File: installing-gcp-three-node
+  - Name: Installation configuration parameters for GCP
+    File: installation-config-parameters-gcp
   - Name: Uninstalling a cluster on GCP
     File: uninstalling-cluster-gcp
 - Name: Installing on IBM Cloud VPC
@@ -286,6 +290,8 @@ Topics:
     File: installing-ibm-cloud-vpc
   - Name: Installing a private cluster on IBM Cloud VPC
     File: installing-ibm-cloud-private
+  - Name: Installation configuration parameters for IBM Cloud VPC
+    File: installation-config-parameters-ibm-cloud-vpc
   - Name: Uninstalling a cluster on IBM Cloud VPC
     File: uninstalling-cluster-ibm-cloud
 - Name: Installing on Nutanix
@@ -316,6 +322,8 @@ Topics:
     File: installing-restricted-networks-bare-metal
   - Name: Scaling a user-provisioned installation with the bare metal operator
     File: scaling-a-user-provisioned-cluster-with-the-bare-metal-operator
+  - Name: Installation configuration parameters for bare metal
+    File: installation-config-parameters-bare-metal
 - Name: Installing on-premise with Assisted Installer
   Dir: installing_on_prem_assisted
   Distros: openshift-enterprise
@@ -358,7 +366,7 @@ Topics:
     File: ipi-install-expanding-the-cluster
   - Name: Troubleshooting
     File: ipi-install-troubleshooting
-- Name: Installing bare metal clusters on IBM Cloud
+- Name: Installing IBM Cloud Bare Metal (Classic)
   Dir: installing_ibm_cloud
   Distros: openshift-origin,openshift-enterprise
   Topics:
@@ -376,6 +384,8 @@ Topics:
     File: installing-ibm-z
   - Name: Restricted network IBM Z installation with z/VM
     File: installing-restricted-networks-ibm-z
+  - Name: Installation configuration parameters for IBM Z and IBM LinuxONE with z/VM
+    File: installation-config-parameters-ibm-z
 - Name: Installing with RHEL KVM on IBM Z and IBM LinuxONE
   Dir: installing_ibm_z
   Distros: openshift-enterprise
@@ -386,6 +396,8 @@ Topics:
     File: installing-ibm-z-kvm
   - Name: Restricted network IBM Z installation with RHEL KVM
     File: installing-restricted-networks-ibm-z-kvm
+  - Name: Installation configuration parameters for IBM Z and IBM LinuxONE with RHEL KVM
+    File: installation-config-parameters-ibm-z-kvm
 - Name: Installing on IBM Power
   Dir: installing_ibm_power
   Distros: openshift-enterprise
@@ -396,6 +408,8 @@ Topics:
     File: installing-ibm-power
   - Name: Restricted network IBM Power installation
     File: installing-restricted-networks-ibm-power
+  - Name: Installation configuration parameters for IBM Power
+    File: installation-config-parameters-ibm-power
 - Name: Installing on IBM Power Virtual Server
   Dir: installing_ibm_powervs
   Distros: openshift-enterprise
@@ -444,38 +458,6 @@ Topics:
     File: uninstalling-cluster-openstack
   - Name: Uninstalling a cluster on OpenStack from your own infrastructure
     File: uninstalling-openstack-user
-- Name: Installing on RHV
-  Dir: installing_rhv
-  Distros: openshift-enterprise
-  Topics:
-  - Name: Preparing to install on RHV
-    File: preparing-to-install-on-rhv
-  - Name: Installing a cluster quickly on RHV
-    File: installing-rhv-default
-  - Name: Installing a cluster on RHV with customizations
-    File: installing-rhv-customizations
-  - Name: Installing a cluster on RHV with user-provisioned infrastructure
-    File: installing-rhv-user-infra
-  - Name: Installing a cluster on RHV in a restricted network
-    File: installing-rhv-restricted-network
-  - Name: Uninstalling a cluster on RHV
-    File: uninstalling-cluster-rhv
-- Name: Installing on oVirt
-  Dir: installing_rhv
-  Distros: openshift-origin
-  Topics:
-  - Name: Preparing to install on RHV
-    File: preparing-to-install-on-rhv
-  - Name: Installing a cluster quickly on oVirt
-    File: installing-rhv-default
-  - Name: Installing a cluster on oVirt with customizations
-    File: installing-rhv-customizations
-  - Name: Installing a cluster on oVirt with user-provisioned infrastructure
-    File: installing-rhv-user-infra
-  - Name: Installing a cluster on RHV in a restricted network
-    File: installing-rhv-restricted-network
-  - Name: Uninstalling a cluster on oVirt
-    File: uninstalling-cluster-rhv
 - Name: Installing on vSphere
   Dir: installing_vsphere
   Distros: openshift-origin,openshift-enterprise
@@ -543,8 +525,19 @@ Topics:
 - Name: Bare metal configuration
   File: bare-metal-configuration
 - Name: Configuring multi-architecture compute machines on an OpenShift cluster
+  Dir: configuring-multi-arch-compute-machines
   Distros: openshift-enterprise
-  File: multi-architecture-configuration
+  Topics:
+  - Name: About clusters with multi-architecture compute machines
+    File: multi-architecture-configuration
+  - Name: Creating a cluster with multi-architecture compute machines on Azure
+    File: creating-multi-arch-compute-nodes-azure
+  - Name: Creating a cluster with multi-architecture compute machines on AWS
+    File: creating-multi-arch-compute-nodes-aws
+  - Name: Creating a cluster with multi-architecture compute machines on bare metal
+    File: creating-multi-arch-compute-nodes-bare-metal
+  - Name: Managing your cluster with multi-architecture compute machines
+    File: multi-architecture-compute-managing
 - Name: Enabling encryption on a vSphere cluster
   File: vsphere-post-installation-encryption
 - Name: Machine configuration tasks
@@ -583,25 +576,33 @@ Distros: openshift-origin,openshift-enterprise
 Topics:
 - Name: Updating clusters overview
   File: index
+  Distros: openshift-origin
 - Name: Understanding OpenShift updates
   Dir: understanding_updates
-  Distros: openshift-enterprise
   Topics:
     - Name: Introduction to OpenShift updates
       File: intro-to-updates
     - Name: How cluster updates work
       File: how-updates-work
-- Name: Understanding update channels and releases
-  File: understanding-upgrade-channels-release
-  Distros: openshift-enterprise
-- Name: Understanding OpenShift update duration
-  File: understanding-openshift-update-duration
-- Name: Preparing to update to OpenShift Container Platform 4.13
-  File: updating-cluster-prepare
-  Distros: openshift-enterprise
-- Name: Preparing to update to OKD 4.13
-  File: updating-cluster-prepare
-  Distros: openshift-origin
+      Distros: openshift-enterprise
+    - Name: Understanding update channels and releases
+      File: understanding-update-channels-release
+      Distros: openshift-enterprise
+    - Name: Understanding OpenShift update duration
+      File: understanding-openshift-update-duration
+- Name: Preparing to update a cluster
+  Dir: preparing_for_updates
+  Topics:
+  - Name: Preparing to update to OpenShift Container Platform 4.14
+    File: updating-cluster-prepare
+    Distros: openshift-enterprise
+  - Name: Preparing to update to OKD 4.14
+    File: updating-cluster-prepare
+    Distros: openshift-origin
+  - Name: Preparing to update a cluster with manually maintained credentials
+    File: preparing-manual-creds-update
+  - Name: Preflight validation for Kernel Module Management (KMM) Modules
+    File: kmm-preflight-validation
 - Name: Performing a cluster update
   Dir: updating_a_cluster
   Topics:
@@ -642,10 +643,6 @@ Topics:
     File: migrating-to-multi-payload
   - Name: Updating hosted control planes
     File: updating-hosted-control-planes
-- Name: Preparing to update a cluster with manually maintained credentials
-  File: preparing-manual-creds-update
-- Name: Preflight validation for Kernel Module Management (KMM) Modules
-  File: kmm-preflight-validation
 # - Name: Troubleshooting an update
 #  File: updating-troubleshooting
 ---
@@ -1488,6 +1485,8 @@ Topics:
     File: understanding-network-observability-operator
   - Name: Configuring the Network Observability Operator
     File: configuring-operator
+  - Name: Network Policy
+    File: network-observability-network-policy
   - Name: Observing the network traffic
     File: observing-network-traffic
   - Name: Monitoring the Network Observability Operator
@@ -1548,6 +1547,8 @@ Topics:
       File: persistent-storage-hostpath
     - Name: Persistent storage using LVM Storage
       File: persistent-storage-using-lvms
+    - Name: Troubleshooting local persistent storage using LVMS
+      File: troubleshooting-local-persistent-storage-using-lvms
 - Name: Using Container Storage Interface (CSI)
   Dir: container_storage_interface
   Distros: openshift-enterprise,openshift-origin
@@ -1592,8 +1593,6 @@ Topics:
     File: persistent-storage-csi-cinder
   - Name: OpenStack Manila CSI Driver Operator
     File: persistent-storage-csi-manila
-  - Name: Red Hat Virtualization CSI Driver Operator
-    File: persistent-storage-csi-ovirt
   - Name: VMware vSphere CSI Driver Operator
     File: persistent-storage-csi-vsphere
 - Name: Generic ephemeral volumes
@@ -1945,12 +1944,16 @@ Topics:
     File: uninstalling-openshift-gitops
   - Name: Setting up a new Argo CD instance
     File: setting-up-argocd-instance
+  - Name: Using Argo Rollouts for progressive deployment delivery
+    File: using-argo-rollouts-for-progressive-deployment-delivery
   - Name: Configuring an OpenShift cluster by deploying an application with cluster configurations
     File: configuring-an-openshift-cluster-by-deploying-an-application-with-cluster-configurations
   - Name: Deploying a Spring Boot application with Argo CD
     File: deploying-a-spring-boot-application-with-argo-cd
   - Name: Argo CD custom resource properties
     File: argo-cd-custom-resource-properties
+  - Name: Configuring secure communication with Redis
+    File: configuring-secure-communication-with-redis
   - Name: Monitoring application health status
     File: health-information-for-resources-deployment
   - Name: Configuring SSO for Argo CD using Dex
@@ -1963,6 +1966,8 @@ Topics:
     File: configuring-resource-quota
   - Name: Monitoring Argo CD custom resource workloads
     File: monitoring-argo-cd-custom-resource-workloads
+  - Name: Viewing Argo CD logs
+    File: viewing-argo-cd-logs
   - Name: Running Control Plane Workloads on Infra nodes
     File: run-gitops-control-plane-workload-on-infra-nodes
   - Name: Sizing requirements for GitOps Operator
@@ -2169,12 +2174,6 @@ Topics:
     File: creating-machineset-nutanix
   - Name: Creating a compute machine set on OpenStack
     File: creating-machineset-osp
-  - Name: Creating a compute machine set on RHV
-    File: creating-machineset-rhv
-    Distros: openshift-enterprise
-  - Name: Creating a compute machine set on oVirt
-    File: creating-machineset-rhv
-    Distros: openshift-origin
   - Name: Creating a compute machine set on vSphere
     File: creating-machineset-vsphere
   - Name: Creating a compute machine set on bare metal
@@ -2204,8 +2203,6 @@ Topics:
     File: adding-aws-compute-user-infra
   - Name: Adding compute machines to vSphere manually
     File: adding-vsphere-compute-user-infra
-  - Name: Adding compute machines to a cluster on RHV
-    File: adding-rhv-compute-user-infra
   - Name: Adding compute machines to bare metal
     File: adding-bare-metal-compute-user-infra
 - Name: Managing machines with the Cluster API
@@ -2388,7 +2385,7 @@ Topics:
     File: nodes-nodes-resources-configuring
   - Name: Allocating specific CPUs for nodes in a cluster
     File: nodes-nodes-resources-cpus
-  - Name: Configuring the TLS security profile for the kubelet
+  - Name: Enabling TLS security profiles for the kubelet
     File: nodes-nodes-tls
     Distros: openshift-enterprise,openshift-origin
 #  - Name: Monitoring for problems in your nodes
@@ -2426,6 +2423,9 @@ Topics:
     File: nodes-containers-events
   - Name: Analyzing cluster resource levels
     File: nodes-cluster-resource-levels
+    Distros: openshift-enterprise,openshift-origin
+  - Name: Configuring a cluster for pods
+    File: nodes-cluster-pods-configuring
     Distros: openshift-enterprise,openshift-origin
   - Name: Setting limit ranges
     File: nodes-cluster-limit-ranges
@@ -2640,10 +2640,6 @@ Topics:
   File: enabling-alert-routing-for-user-defined-projects
 - Name: Managing metrics
   File: managing-metrics
-- Name: Querying metrics
-  File: querying-metrics
-- Name: Managing metrics targets
-  File: managing-metrics-targets
 - Name: Managing alerts
   File: managing-alerts
 - Name: Reviewing monitoring dashboards
@@ -3117,6 +3113,10 @@ Topics:
     File: alertmanager-monitoring-coreos-com-v1
   - Name: 'AlertmanagerConfig [monitoring.coreos.com/v1beta1]'
     File: alertmanagerconfig-monitoring-coreos-com-v1beta1
+  - Name: 'AlertRelabelConfig [monitoring.openshift.io/v1]'
+    File: alertrelabelconfig-monitoring-openshift-io-v1
+  - Name: 'AlertingRule [monitoring.openshift.io/v1]'
+    File: alertingrule-monitoring-openshift-io-v1
   - Name: 'PodMonitor [monitoring.coreos.com/v1]'
     File: podmonitor-monitoring-coreos-com-v1
   - Name: 'Probe [monitoring.coreos.com/v1]'
@@ -3134,6 +3134,8 @@ Topics:
   Topics:
   - Name: About Network APIs
     File: network-apis-index
+  - Name: 'AdminPolicyBasedExternalRoute [k8s.ovn.org/v1]'
+    File: adminpolicybasedexternalroute-k8s-ovn-org-v1
   - Name: 'CloudPrivateIPConfig [cloud.network.openshift.io/v1]'
     File: cloudprivateipconfig-cloud-network-openshift-io-v1
   - Name: 'EgressFirewall [k8s.ovn.org/v1]'
@@ -3352,14 +3354,14 @@ Topics:
     File: appliedclusterresourcequota-quota-openshift-io-v1
   - Name: 'ClusterResourceQuota [quota.openshift.io/v1]'
     File: clusterresourcequota-quota-openshift-io-v1
-  - Name: 'FlowSchema [flowcontrol.apiserver.k8s.io/v1beta1]'
-    File: flowschema-flowcontrol-apiserver-k8s-io-v1beta1
+  - Name: 'FlowSchema [flowcontrol.apiserver.k8s.io/v1beta3]'
+    File: flowschema-flowcontrol-apiserver-k8s-io-v1beta3
   - Name: 'LimitRange [undefined/v1]'
     File: limitrange-v1
   - Name: 'PriorityClass [scheduling.k8s.io/v1]'
     File: priorityclass-scheduling-k8s-io-v1
-  - Name: 'PriorityLevelConfiguration [flowcontrol.apiserver.k8s.io/v1beta1]'
-    File: prioritylevelconfiguration-flowcontrol-apiserver-k8s-io-v1beta1
+  - Name: 'PriorityLevelConfiguration [flowcontrol.apiserver.k8s.io/v1beta3]'
+    File: prioritylevelconfiguration-flowcontrol-apiserver-k8s-io-v1beta3
   - Name: 'ResourceQuota [undefined/v1]'
     File: resourcequota-v1
 - Name: Security APIs
@@ -3501,7 +3503,7 @@ Topics:
     File: installing-ossm
   - Name: Creating the ServiceMeshControlPlane
     File: ossm-create-smcp
-  - Name: Adding workloads to a service mesh
+  - Name: Adding services to a service mesh
     File: ossm-create-mesh
   - Name: Enabling sidecar injection
     File: prepare-to-deploy-applications-ossm
@@ -3594,61 +3596,53 @@ Name: Virtualization
 Dir: virt
 Distros: openshift-enterprise,openshift-origin
 Topics:
-- Name: About OpenShift Virtualization
-  File: about-virt
+- Name: About
+  Dir: about_virt
+  Topics:
+  - Name: About OpenShift Virtualization
+    File: about-virt
+    Distros: openshift-enterprise
+  - Name: About OKD Virtualization
+    File: about-virt
+    Distros: openshift-origin
+  - Name: Security policies
+    File: virt-security-policies
+  - Name: Architecture
+    File: virt-architecture
+    Distros: openshift-enterprise
 - Name: Release notes
   Dir: release_notes
   Topics:
   - Name: OpenShift Virtualization release notes
-    File: placeholder-release-notes
+    File: virt-release-notes-placeholder
     Distros: openshift-enterprise
-# - Name: Release notes
-#   Dir: release_notes
-#   Topics:
-#   - Name: OKD release notes
-#     File: placeholder-release-notes
-#     Distros: openshift-origin
-- Name: OpenShift Virtualization architecture
-  File: virt-architecture
-  Distros: openshift-enterprise
-- Name: About OKD Virtualization
-  File: about-virt
-  Distros: openshift-origin
-- Name: Getting started with OpenShift Virtualization
-  File: virt-getting-started
-  Distros: openshift-enterprise
-- Name: Getting started with OKD Virtualization
-  File: virt-getting-started
-  Distros: openshift-origin
-- Name: Web console overview
-  File: virt-web-console-overview
-  Distros: openshift-enterprise
+  # - Name: OKD Virtualization release notes
+  #   File: virt-release-notes-placeholder
+  #   Distros: openshift-origin
+- Name: Getting started
+  Dir: getting_started
+  Topics:
+  - Name: Getting started with OpenShift Virtualization
+    File: virt-getting-started
+    Distros: openshift-enterprise
+  - Name: Getting started with OKD Virtualization
+    File: virt-getting-started
+    Distros: openshift-origin
+  - Name: Using the virtctl and libguestfs CLI tools
+    File: virt-using-the-cli-tools
+  - Name: Web console overview
+    File: virt-web-console-overview
+    Distros: openshift-enterprise
 - Name: Installing
   Dir: install
   Topics:
-  - Name: Preparing your cluster for OpenShift Virtualization
+  - Name: Preparing your cluster
     File: preparing-cluster-for-virt
+  - Name: Installing OpenShift Virtualization
+    File: installing-virt
     Distros: openshift-enterprise
-  - Name: Preparing your OKD cluster for OKD Virtualization
-    File: preparing-cluster-for-virt
-    Distros: openshift-origin
-  - Name: Specifying nodes for OpenShift Virtualization components
-    File: virt-specifying-nodes-for-virtualization-components
-    Distros: openshift-enterprise
-  - Name: Specifying nodes for OKD Virtualization components
-    File: virt-specifying-nodes-for-virtualization-components
-    Distros: openshift-origin
-  - Name: Installing OpenShift Virtualization using the web console
-    File: installing-virt-web
-    Distros: openshift-enterprise
-  - Name: Installing OKD Virtualization using the web console
-    File: installing-virt-web
-    Distros: openshift-origin
-  - Name: Installing OpenShift Virtualization using the CLI
-    File: installing-virt-cli
-    Distros: openshift-enterprise
-  - Name: Installing OKD Virtualization using the CLI
-    File: installing-virt-cli
+  - Name: Installing OKD Virtualization
+    File: installing-virt
     Distros: openshift-origin
   - Name: Uninstalling OpenShift Virtualization
     File: uninstalling-virt
@@ -3656,22 +3650,36 @@ Topics:
   - Name: Uninstalling OKD Virtualization
     File: uninstalling-virt
     Distros: openshift-origin
-- Name: Updating OpenShift Virtualization
-  File: upgrading-virt
-  Distros: openshift-enterprise
-- Name: Updating OKD Virtualization
-  File: upgrading-virt
-  Distros: openshift-origin
-- Name: Security policies
-  File: virt-security-policies
-- Name: Using the virtctl and libguestfs CLI tools
-  File: virt-using-the-cli-tools
+- Name: Post-installation configuration
+  Dir: post_installation_configuration
+  Topics:
+  - Name: Post-installation configuration
+    File: virt-post-install-config
+  - Name: Node placement rules
+    File: virt-node-placement-virt-components
+  - Name: Network configuration
+    File: virt-post-install-network-config
+  - Name: Storage configuration
+    File: virt-post-install-storage-config
+- Name: Updating
+  Dir: updating
+  Topics:
+  - Name: Updating OpenShift Virtualization
+    File: upgrading-virt
+    Distros: openshift-enterprise
+  - Name: Updating OKD Virtualization
+    File: upgrading-virt
+    Distros: openshift-origin
 - Name: Virtual machines
   Dir: virtual_machines
   Topics:
 ###VIRTUAL MACHINE CHESS SALAD (silly name to highlight that the commented out assemblies need to be checked against merged filenams)
   - Name: Creating virtual machines
-    File: virt-create-vms
+    File: virt-creating-vms
+  - Name: Connecting to VM consoles
+    File: virt-accessing-vm-consoles
+  - Name: Configuring SSH access to VMs
+    File: virt-accessing-vm-ssh
   - Name: Editing virtual machines
     File: virt-edit-vms
   - Name: Editing boot order
@@ -3684,12 +3692,8 @@ Topics:
     File: virt-manage-vmis
   - Name: Controlling virtual machine states
     File: virt-controlling-vm-states
-  - Name: Accessing virtual machine consoles
-    File: virt-accessing-vm-consoles
   - Name: Automating Windows installation with sysprep
     File: virt-automating-windows-sysprep
-  - Name: Triggering virtual machine failover by resolving a failed node
-    File: virt-triggering-vm-failover-resolving-failed-node
   - Name: Installing the QEMU guest agent and VirtIO drivers
     File: virt-installing-qemu-guest-agent
   - Name: Viewing the QEMU guest agent information for virtual machines
@@ -3698,6 +3702,10 @@ Topics:
     File: virt-using-vtpm-devices
   - Name: Managing virtual machines with OpenShift Pipelines
     File: virt-managing-vms-openshift-pipelines
+  - Name: Managing automatic boot source updates
+    File: virt-automatic-bootsource-updates
+  - Name: Creating custom boot sources
+    File: virt-creating-and-using-boot-sources
   - Name: Advanced virtual machine management
     Dir: advanced_vm_management
     Topics:
@@ -3728,6 +3736,10 @@ Topics:
       File: virt-configuring-mediated-devices
     - Name: Enabling descheduler evictions on virtual machines
       File: virt-enabling-descheduler-evictions
+    - Name: About high availability for virtual machines
+      File: virt-high-availability-for-vms
+    - Name: Control plane tuning
+      File: virt-vm-control-plane-tuning
 # Importing virtual machines
   - Name: Importing virtual machines
     Dir: importing_vms
@@ -3747,33 +3759,7 @@ Topics:
     - Name: Cloning a virtual machine by using a data volume template
       File: virt-cloning-vm-using-datavolumetemplate
     - Name: Cloning a virtual machine disk into a new block storage persistent volume claim
-      File: virt-cloning-vm-disk-into-new-block-storage-pvc
-# Virtual machine networking
-  - Name: Virtual machine networking
-    Dir: vm_networking
-    Topics:
-    - Name: Configuring a virtual machine for the default pod network
-      File: virt-using-the-default-pod-network-with-virt
-      Distros: openshift-enterprise
-    - Name: Configuring a virtual machine for the default pod network with OKD Virtualization
-      File: virt-using-the-default-pod-network-with-virt
-      Distros: openshift-origin
-    - Name: Creating a service to expose a virtual machine
-      File: virt-creating-service-vm
-    - Name: Connecting a virtual machine to a Linux bridge network
-      File: virt-attaching-vm-multiple-networks
-    - Name: Connecting a virtual machine to an SR-IOV network
-      File: virt-attaching-vm-to-sriov-network
-    - Name: Connecting a virtual machine to a service mesh
-      File: virt-connecting-vm-to-service-mesh
-    - Name: Configuring IP addresses for virtual machines
-      File: virt-configuring-ip-for-vms
-    - Name: Viewing the IP address of NICs on a virtual machine
-      File: virt-viewing-ip-of-vm-nic
-    - Name: Accessing a virtual machine on a secondary network by using the cluster domain name
-      File: virt-accessing-vm-secondary-network-fqdn
-    - Name: Using a MAC address pool for virtual machines
-      File: virt-using-mac-address-pool-for-vms
+      File: virt-cloning-vm-disk-to-new-block-storage-pvc
 #A BETTER NAME THAN 'STORAGE 4 U'
   - Name: Virtual machine disks
     Dir: virtual_disks
@@ -3814,25 +3800,31 @@ Topics:
       File: virt-reusing-statically-provisioned-persistent-volumes
     - Name: Expanding a virtual machine disk
       File: virt-expanding-vm-disk
-# Templates
-- Name: Virtual machine templates
-  Dir: vm_templates
+- Name: Networking
+  Dir: vm_networking
   Topics:
-  - Name: Creating virtual machine templates
-    File: virt-creating-vm-template
-  - Name: Editing virtual machine templates
-    File: virt-editing-vm-template
-  - Name: Enabling dedicated resources for a virtual machine template
-    File: virt-dedicated-resources-vm-template
-  - Name: Deploying a virtual machine template to a custom namespace
-    File: virt-deploying-vm-template-to-custom-namespace
-  - Name: Deleting a virtual machine template
-    File: virt-deleting-vm-template
-  - Name: Creating and using boot sources
-    File: virt-creating-and-using-boot-sources
-  - Name: Managing automatic boot source updates
-    File: virt-automatic-bootsource-updates
-    Distros: openshift-enterprise
+  - Name: Connecting a VM to the default pod network
+    File: virt-connecting-vm-to-default-pod-network
+  - Name: Exposing a VM by using a service
+    File: virt-exposing-vm-with-service
+  - Name: Connecting a VM to a Linux bridge network
+    File: virt-connecting-vm-to-linux-bridge
+  - Name: Connecting a VM to an SR-IOV network
+    File: virt-connecting-vm-to-sriov
+  - Name: Using DPDK with SR-IOV
+    File: virt-using-dpdk-with-sriov
+  - Name: Hot plugging secondary network interfaces
+    File: virt-hot-plugging-network-interfaces
+  - Name: Connecting a VM to a service mesh
+    File: virt-connecting-vm-to-service-mesh
+  - Name: Configuring a dedicated network for live migration
+    File: virt-dedicated-network-live-migration
+  - Name: Configuring and viewing IP addresses
+    File: virt-configuring-viewing-ips-for-vms
+  - Name: Accessing a VM by using the cluster FQDN
+    File: virt-accessing-vm-secondary-network-fqdn
+  - Name: Managing MAC address pools for network interfaces
+    File: virt-using-mac-address-pool-for-vms
 # Virtual machine live migration
 - Name: Live migration
   Dir: live_migration
@@ -3843,8 +3835,6 @@ Topics:
     File: virt-live-migration-limits
   - Name: Migrating a virtual machine instance to another node
     File: virt-migrate-vmi
-  - Name: Migrating a virtual machine over a dedicated additional network
-    File: virt-migrating-vm-on-secondary-network
   - Name: Cancelling the live migration of a virtual machine instance
     File: virt-cancel-vmi-migration
   - Name: Configuring virtual machine eviction strategy
@@ -3863,12 +3853,14 @@ Topics:
     File: virt-managing-node-labeling-obsolete-cpu-models
   - Name: Preventing node reconciliation
     File: virt-preventing-node-reconciliation
+  - Name: Deleting a failed node to trigger virtual machine failover
+    File: virt-triggering-vm-failover-resolving-failed-node
 - Name: Monitoring
   Dir: monitoring
   Topics:
   - Name: Monitoring overview
     File: virt-monitoring-overview
-  - Name: OpenShift cluster checkup framework
+  - Name: Cluster checkup framework
     File: virt-running-cluster-checkups
   - Name: Prometheus queries for virtual resources
     File: virt-prometheus-queries

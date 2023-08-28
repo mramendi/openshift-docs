@@ -12,7 +12,6 @@
 // * installing/installing_ibm_z/installing-ibm-z-kvm.adoc
 // * installing/installing_ibm_z/installing-ibm-power.adoc
 // * installing/installing_ibm_z/installing-restricted-networks-ibm-power.adoc
-// * installing/installing-rhv-restricted-network.adoc
 // * installing/installing_openstack/installing-openstack-installer-custom.adoc
 // * installing/installing_openstack/installing-openstack-installer-kuryr.adoc
 
@@ -91,7 +90,7 @@ The load balancing infrastructure must meet the following requirements:
 +
 [IMPORTANT]
 ====
-Do not configure session persistence for an API load balancer.
+Do not configure session persistence for an API load balancer. Configuring session persistence for a Kubernetes API server might cause performance issues from excess application traffic for your {product-title} cluster and the Kubernetes API that runs inside the cluster.
 ====
 +
 Configure the following ports on both the front and back of the load balancers:

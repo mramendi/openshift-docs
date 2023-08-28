@@ -30,7 +30,7 @@ If you create ROSA clusters by using {cluster-manager-url}, you must have the fo
 
 [TIP]
 ====
-If you only use the `rosa` CLI tool, then you do not need to create these IAM roles.
+If you only use the ROSA CLI (`rosa`), then you do not need to create these IAM roles.
 ====
 
 These AWS IAM roles are as follows:
@@ -94,8 +94,8 @@ include::modules/rosa-sts-oidc-provider-command.adoc[leveloffset=+2]
 
 include::modules/rosa-oidc-config-overview.adoc[leveloffset=+2]
 [discrete]
-include::modules/rosa-hcp-byo-oidc.adoc[leveloffset=+3]
+include::modules/rosa-sts-byo-oidc.adoc[leveloffset=+3]
 [discrete]
-include::modules/rosa-hcp-byo-oidc-options.adoc[leveloffset=+3]
+include::modules/rosa-sts-byo-oidc-options.adoc[leveloffset=+3]
 
 include::modules/rosa-aws-scp.adoc[leveloffset=+1]

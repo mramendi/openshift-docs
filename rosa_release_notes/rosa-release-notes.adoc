@@ -10,17 +10,32 @@ toc::[]
 
 {product-title} clusters are available on the link:https://console.redhat.com/openshift[Hybrid Cloud Console]. With the Red Hat OpenShift Cluster Manager application for ROSA, you can deploy {product-title} clusters to either on-premises or cloud environments.
 
-include::modules/rosa-update-cli-tool.adoc[]
-
 [id="rosa-new-changes-and-updates_{context}"]
 == New changes and updates
+
+[id="rosa-q3-2023_{context}"]
+=== Q3 2023
+
+* **ROSA CLI update:** The ROSA CLI (`rosa`) was updated to a new version. For information about what's changed in this release, see the link:https://github.com/openshift/rosa/releases/tag/v1.2.25[release notes]. For more information about the ROSA CLI (`rosa`), see xref:../cli_reference/rosa_cli/rosa-get-started-cli.adoc[Getting started with the ROSA CLI].
+
+* **ROSA regional availability update:** {product-title} (ROSA) is now available in the following regions:
++
+** Hyderabad (`ap-south-2`)
+** Melbourne (`ap-southeast-4`)
+** Zurich (`eu-central-2`)
++
+For more information on region availabilities, see xref:../rosa_architecture/rosa_policy_service_definition/rosa-service-definition.html#rosa-sdpolicy-regions-az_rosa-service-definition[Regions and availability zones].
+
+* **Documentation update:** The CLI Tools section was added to the ROSA documentation and includes more detailed information to help you fully use all of the supported CLI tools. The ROSA CLI section can now be found nested inside the CLI Tools heading. For more information, see xref:../cli_reference/index.adoc[CLI tools overview].
+
+* **Documentation update:** The Monitoring section in the documentation was expanded and now includes more detailed information to help you conveniently manage your ROSA clusters. For more information, see xref:../monitoring/monitoring-overview.html[Monitoring overview].
 
 [id="rosa-q2-2023_{context}"]
 === Q2 2023
 
-* **ROSA CLI update:** The ROSA CLI (`rosa`) has been updated to a new version. For information about what's changed in this release, see the link:https://github.com/openshift/rosa/releases/tag/v1.2.23[release notes]. For more information about the ROSA CLI (`rosa`,) see xref:../rosa_cli/rosa-get-started-cli.html[Getting started with the rosa CLI].
+* **ROSA CLI update:** The ROSA CLI (`rosa`) was updated to a new version. For information about what's changed in this release, see the link:https://github.com/openshift/rosa/releases/tag/v1.2.23[release notes]. For more information about the ROSA CLI (`rosa`), see xref:../cli_reference/rosa_cli/rosa-get-started-cli.adoc[Getting started with the ROSA CLI].
 
-* **ROSA regional availability update:** {product-title} (ROSA) is now available in the United Arab Emirates (`me-central-1`) region. For more information on region availability, see xref:../rosa_architecture/rosa_policy_service_definition/rosa-service-definition.html#rosa-sdpolicy-regions-az_rosa-service-definition[Regions and availability zones].
+* **ROSA regional availability update:** {product-title} (ROSA) is now available in the United Arab Emirates (`me-central-1`) region. For more information on region availability, see xref:../rosa_architecture/rosa_policy_service_definition/rosa-service-definition.adoc#rosa-sdpolicy-regions-az_rosa-service-definition[Regions and availability zones].
 
 include::snippets/rosa-hcp-rn.adoc[leveloffset=+1]
 :featureName: ROSA with HCP
@@ -31,11 +46,12 @@ include::snippets/technology-preview.adoc[leveloffset=+1]
 
 * **OIDC provider endpoint URL update:** Starting with ROSA CLI version 1.2.7, all new cluster OIDC provider endpoint URLs are no longer regional. AWS CloudFront is part of this implementation to improve access speed, reduce latency, and improve resiliency. This change is only available for new clusters created with ROSA CLI 1.2.7 or later. There are no supported migration paths for existing OIDC provider configurations.
 
-
 [id="rosa-known-issues_{context}"]
 == Known issues
 * The OpenShift Cluster Manager roles (`ocm-role`) and user roles (`user-role`) that are key to the ROSA provisioning wizard might get enabled accidentally in your Red Hat organization by another user. However, this behavior does not affect the usability.
 * The `htpasswd` identity provider does not function as expected in all scenarios against the `rosa create admin` function.
+
+include::modules/rosa-update-cli-tool.adoc[]
 
 [id="rosa-deprecated-removed-features_{context}"]
 == Deprecated and removed features

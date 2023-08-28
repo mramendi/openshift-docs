@@ -6,6 +6,12 @@ include::_attributes/common-attributes.adoc[]
 
 toc::[]
 
+////
+WARNING: This assembly has been moved into a subdirectory for 4.14+. Changes to this assembly for earlier versions should be done in separate PRs based off of their respective version branches. Otherwise, your cherry picks may fail.
+
+To do: Remove this comment once 4.13 docs are EOL.
+////
+
 To get an update experience similar to connected clusters, you can use the following procedures to install and configure the OpenShift Update Service (OSUS) in a disconnected environment.
 
 The following steps outline the high-level workflow on how to update a cluster in a disconnected environment using OSUS:
@@ -22,12 +28,13 @@ The following steps outline the high-level workflow on how to update a cluster i
 
 . Perform a supported update procedure from the documentation as you would with a connected cluster.
 
+// Using the OpenShift Update Service in a disconnected environment
 include::modules/disconnected-osus-overview.adoc[leveloffset=+1]
 
 .Additional resources
 
 * xref:../../../updating/understanding_updates/intro-to-updates.adoc#update-service-about_understanding-openshift-updates[About the OpenShift Update Service]
-* xref:../../../updating/understanding-upgrade-channels-release.adoc#understanding-upgrade-channels-releases[Understanding update channels and releases]
+* xref:../../../updating/understanding_updates/understanding-update-channels-release.adoc#understanding-update-channels-releases[Understanding update channels and releases]
 
 [id="update-service-prereqs"]
 == Prerequisites
@@ -62,6 +69,7 @@ data:
 <1> The OpenShift Update Service Operator requires the config map key name updateservice-registry in the registry CA cert.
 <2> If the registry has the port, such as `registry-with-port.example.com:5000`, `:` should be replaced with `..`.
 
+// Updating the global cluster pull secret
 include::modules/images-update-global-pull-secret.adoc[leveloffset=+1]
 
 [id="update-service-install"]
@@ -74,8 +82,10 @@ To install the OpenShift Update Service, you must first install the OpenShift Up
 For clusters that are installed in disconnected environments, also known as disconnected clusters, Operator Lifecycle Manager by default cannot access the Red Hat-provided OperatorHub sources hosted on remote registries because those remote sources require full internet connectivity. For more information, see xref:../../../operators/admin/olm-restricted-networks.adoc#olm-restricted-networks[Using Operator Lifecycle Manager on restricted networks].
 ====
 
+// Installing the OpenShift Update Service Operator by using the web console
 include::modules/update-service-install-web-console.adoc[leveloffset=+2]
 
+// Installing the OpenShift Update Service Operator by using the CLI
 include::modules/update-service-install-cli.adoc[leveloffset=+2]
 
 [role="_additional-resources"]
@@ -83,6 +93,7 @@ include::modules/update-service-install-cli.adoc[leveloffset=+2]
 
 * xref:../../../operators/user/olm-installing-operators-in-namespace.adoc#olm-installing-operators-in-namespace[Installing Operators in your namespace].
 
+// Creating the OpenShift Update Service graph data container image
 include::modules/update-service-graph-data.adoc[leveloffset=+1]
 
 [id="update-service-create-service"]
@@ -90,8 +101,10 @@ include::modules/update-service-graph-data.adoc[leveloffset=+1]
 
 You can create an OpenShift Update Service application by using the {product-title} web console or CLI.
 
+// Creating an OpenShift Update Service application by using the web console
 include::modules/update-service-create-service-web-console.adoc[leveloffset=+2]
 
+// Creating an OpenShift Update Service application by using the CLI
 include::modules/update-service-create-service-cli.adoc[leveloffset=+2]
 
 [NOTE]
@@ -100,6 +113,7 @@ The policy engine route name must not be more than 63 characters based on RFC-11
 and must be no more than 63 characters`, try creating the Update Service with a shorter name.
 ====
 
+// Configuring the Cluster Version Operator (CVO)
 include::modules/update-service-configure-cvo.adoc[leveloffset=+3]
 
 [NOTE]

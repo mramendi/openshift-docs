@@ -65,7 +65,6 @@ apiVersion: agent-install.openshift.io/v1beta1
 kind: AgentServiceConfig
 metadata:
   name: agent
-  namespace: assisted-installer
 spec:
   databaseStorage:
     volumeName: <db_pv_name>
@@ -85,10 +84,9 @@ spec:
     name: 'assisted-installer-mirror-config'
   osImages:
     - openshiftVersion: <ocp_version>
-      rootfs: <rootfs_url> <1>
       url: <iso_url> <1>
 ----
-<1> Must match the URLs of the HTTPD server.
+<1> Must match the URL of the HTTPD server.
 
 [IMPORTANT]
 ====

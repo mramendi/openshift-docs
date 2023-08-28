@@ -22,7 +22,7 @@ When you restore your cluster, you must use an etcd backup that was taken from t
 
 .Prerequisites
 
-* Access to the cluster as a user with the `cluster-admin` role.
+* Access to the cluster as a user with the `cluster-admin` role through a certificate-based `kubeconfig` file, like the one that was used during installation.
 * A healthy control plane host to use as the recovery host.
 * SSH access to control plane hosts.
 * A backup directory containing both the etcd snapshot and the resources for the static pods, which were from the same backup. The file names in the directory must be in the following formats: `snapshot_<datetimestamp>.db` and `static_kuberesources_<datetimestamp>.tar.gz`.
@@ -53,7 +53,7 @@ This procedure assumes that you copied the `backup` directory containing the etc
 +
 [NOTE]
 ====
-It is not required to manually stop the pods on the recovery host. The recovery script will stop the pods on the recovery host.
+You do not need to stop the static pods on the recovery host.
 ====
 
 .. Access a control plane host that is not the recovery host.
@@ -162,14 +162,14 @@ $ oc get nodes -w
 [source,terminal]
 ----
 NAME                STATUS  ROLES          AGE     VERSION
-host-172-25-75-28   Ready   master         3d20h   v1.26.0
-host-172-25-75-38   Ready   infra,worker   3d20h   v1.26.0
-host-172-25-75-40   Ready   master         3d20h   v1.26.0
-host-172-25-75-65   Ready   master         3d20h   v1.26.0
-host-172-25-75-74   Ready   infra,worker   3d20h   v1.26.0
-host-172-25-75-79   Ready   worker         3d20h   v1.26.0
-host-172-25-75-86   Ready   worker         3d20h   v1.26.0
-host-172-25-75-98   Ready   infra,worker   3d20h   v1.26.0
+host-172-25-75-28   Ready   master         3d20h   v1.27.3
+host-172-25-75-38   Ready   infra,worker   3d20h   v1.27.3
+host-172-25-75-40   Ready   master         3d20h   v1.27.3
+host-172-25-75-65   Ready   master         3d20h   v1.27.3
+host-172-25-75-74   Ready   infra,worker   3d20h   v1.27.3
+host-172-25-75-79   Ready   worker         3d20h   v1.27.3
+host-172-25-75-86   Ready   worker         3d20h   v1.27.3
+host-172-25-75-98   Ready   infra,worker   3d20h   v1.27.3
 ----
 +
 It can take several minutes for all nodes to report their state.
@@ -206,7 +206,7 @@ $ sudo systemctl restart kubelet.service
 +
 [NOTE]
 ====
-Clusters with no worker nodes, such as single-node clusters or clusters consisting of three schedulable control plane nodes, will not have any pending CSRs to approve. In those scenarios, you can skip this step.
+Clusters with no worker nodes, such as single-node clusters or clusters consisting of three schedulable control plane nodes, will not have any pending CSRs to approve. You can skip all the commands listed in this step.
 ====
 
 .. Get the list of current CSRs:
@@ -272,16 +272,6 @@ $ sudo crictl ps | grep etcd | egrep -v "operator|etcd-guard"
 $ oc -n openshift-etcd get pods -l k8s-app=etcd
 ----
 +
-[NOTE]
-====
-If you attempt to run `oc login` prior to running this command and receive the following error, wait a few moments for the authentication controllers to start and try again.
-
-[source,terminal]
-----
-Unable to connect to the server: EOF
-----
-====
-+
 .Example output
 [source,terminal]
 ----
@@ -290,20 +280,15 @@ etcd-ip-10-0-143-125.ec2.internal                1/1     Running     1          
 ----
 +
 If the status is `Pending`, or the output lists more than one running etcd pod, wait a few minutes and check again.
-+
-[NOTE]
-====
-Perform the following step only if you are using `OVNKubernetes` network plugin.
-====
 
-. Delete the node objects that are associated with control plane hosts that are not the recovery control plane host.
+. If you are using the `OVNKubernetes` network plugin, delete the node objects that are associated with control plane hosts that are not the recovery control plane host.
 +
 [source,terminal]
 ----
 $ oc delete node <non-recovery-controlplane-host-1> <non-recovery-controlplane-host-2>
 ----
 
-. Verify that the Cluster Network Operator (CNO) redeploys the OVN-Kubernetes control plane and that it no longer references the non-recovery controller IP addresses. To verify this result, regularly check the output of the following command. Wait until it returns an empty result before you proceed with the next step.
+. Verify that the Cluster Network Operator (CNO) redeploys the OVN-Kubernetes control plane and that it no longer references the non-recovery controller IP addresses. To verify this result, regularly check the output of the following command. Wait until it returns an empty result before you proceed to restart the Open Virtual Network (OVN) Kubernetes pods on all of the hosts in the next step.
 +
 [source,terminal]
 ----
@@ -558,17 +543,16 @@ $ oc patch etcd/cluster --type=merge -p '{"spec": {"unsupportedConfigOverrides":
 +
 This command ensures that you can successfully re-create secrets and roll out the static pods.
 
-. In a separate terminal window, log in to the cluster as a user with the `cluster-admin` role by entering the following command:
+. In a separate terminal window within the recovery host, export the recovery `kubeconfig` file by running the following command:
 +
 [source,terminal]
 ----
-$ oc login -u <cluster_admin> <1>
+$ export KUBECONFIG=/etc/kubernetes/static-pod-resources/kube-apiserver-certs/secrets/node-kubeconfigs/localhost-recovery.kubeconfig
 ----
-<1> For `<cluster_admin>`, specify a user name with the `cluster-admin` role.
 
 . Force etcd redeployment.
 +
-In a terminal that has access to the cluster as a `cluster-admin` user, run the following command:
+In the same terminal window where you exported the recovery `kubeconfig` file, run the following command:
 +
 [source,terminal]
 ----
