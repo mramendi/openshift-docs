@@ -120,7 +120,7 @@ spec:
           failurePolicy: Fail
           timeoutSeconds: 20
           sideEffects: None
-        pipelines.triggers.tekton.dev:
+        pipelinesascode.tekton.dev:
           failurePolicy: Fail
           timeoutSeconds: 20
           sideEffects: None
