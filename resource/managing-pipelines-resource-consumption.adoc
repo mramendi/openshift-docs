@@ -1,0 +1,19 @@
+:_mod-docs-content-type: ASSEMBLY
+include::_attributes/common-attributes.adoc[]
+[id="managing-pipelines-resource-consumption"]
+= Managing resource consumption in {pipelines-shortname}
+:context: reducing-pipelines-resource-consumption
+
+toc::[]
+
+You can manage the consumption of resources, such as CPU, memory, and storage, by pipelines and tasks that you run using {pipelines-shortname}. The following methods of managing resource consumption are available:
+
+* You can create resource quotas and limit ranges in {OCP} to control resource consumption by containers and pods in your namespace.
+
+* You can modify your pipelines and tasks to reduce the number of steps in a task, because a task allocates resources for containers that execute all its steps.
+
+* You can specify resource limits for a particular step in the definition of a task.
+
+* You can specify resource limits for a particular step or sidecar in the definition of a task run.
+
+* You can specify a priority class for a pipeline run or task run. In the event of a resource insufficiency on the cluster, the run with a higher priority class receives resources first. You can also specify a separate resource quota for a particular priority class.
